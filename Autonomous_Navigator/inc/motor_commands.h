@@ -26,6 +26,12 @@ void Motor_Stop();
 #define MAXIMUM_OPERATIONS 40
 
 /**
+ * @brief this function makes the motors stop if duty cycle is 0.
+ *
+ * @param duty_cycle
+ */
+void Motor_ControlledTurn(int16_t duty_cycle)
+/**
  * @brief this chooses the appropriate motor function based on the duty cycle.
  * 
  * @param duty_cycle if negative, turn left; if positive, turn right
