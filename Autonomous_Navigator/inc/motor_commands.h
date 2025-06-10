@@ -30,7 +30,7 @@ void Motor_Stop();
  *
  * @param duty_cycle
  */
-void Motor_ControlledTurn(int16_t duty_cycle)
+void Motor_ControlledTurn(int16_t duty_cycle);
 /**
  * @brief this chooses the appropriate motor function based on the duty cycle.
  * 
