@@ -11,6 +11,15 @@ void Motor_Right(uint16_t left_duty_cycle, uint16_t right_duty_cycle);
 void Motor_Stop();
 */
 
+void Motor_ControlledTurn(int16_t duty_cycle) {
+    if (duty_cycle == 0) {
+        Motor_Stop();
+    } else {
+        Motor_Turn(duty_cycle);
+    }
+}
+
+
 void Motor_Turn(int16_t duty_cycle) {
 	uint16_t abs_duty_cycle = (duty_cycle < 0) ? -duty_cycle : duty_cycle;
 
