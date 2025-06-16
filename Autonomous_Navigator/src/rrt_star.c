@@ -223,7 +223,8 @@ uint8_t extract_path(
 
     double  goal_radius,
     Node**  path,
-    int*    path_length)
+    int*    path_length,
+    Node**  goal_node_out)
 {
     
     // counter variables
@@ -245,6 +246,11 @@ uint8_t extract_path(
     if (!goal_node) {
         *path_length = 0;
         return 0; // No path found
+    }
+
+    // Assign the goal node to the output pointer
+    if (goal_node_out) {
+        *goal_node_out = goal_node;
     }
 
     // Trace back from goal_node to start using parent pointers
@@ -361,7 +367,14 @@ uint8_t find_optimal_path(
     // if a path to the goal was found, extract it
     if (found) {
         *path       = (Node**)malloc(tree->num_nodes * sizeof(Node*));
-        int success = extract_path(tree, goal_x, goal_y, GOAL_RADIUS, *path, path_length);
+        Node* goal_node = NULL;
+        int success = extract_path(tree, goal_x, goal_y, GOAL_RADIUS, *path, path_length, &goal_node);
+
+        if (success && goal_node) {
+            printf("Path from root to goal:\n");
+            print_path_from_root_to_goal(goal_node);
+        }
+
         *tree_out   = tree;
         return success;
 
@@ -523,3 +536,34 @@ void rrt_star_demo(void) {
     }
     if (path) free(path);
 }
+
+
+/**
+ * @brief Print optimal path of the parent nodes into a Linked list from root to goal
+ *
+ * @param tree
+ * @param start_x
+ * @param start_y
+ */
+
+
+void print_path_from_root_to_goal(Node* goal_node) {
+    // Temporary array to store the reversed path
+    Node* stack[1000]; // Large enough; make dynamic if needed
+    int top = 0;
+    int i;
+
+    // Traverse from goal to root, pushing onto stack
+    Node* current = goal_node;
+    while (current) {
+        stack[top++] = current;
+        current = current->parent;
+    }
+
+    // Print from root to goal
+    for (i = top - 1; i >= 0; i--) {
+        printf("Step %d: (%.2f, %.2f)\n", top - i - 1, stack[i]->x, stack[i]->y);
+    }
+}
+
+

@@ -3,11 +3,7 @@
 #define __MOTOR_COMMANDS_H__
 
 #include "rrt_star.h"
-#include "Motor.h"
-
 #include "./inc/motor_commands.h"
-
-
 #include <stdint.h>
 
 

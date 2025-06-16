@@ -1,5 +1,6 @@
 
 #include "./inc/motor_commands.h"
+#include "../inc/rrt_star.h"
 
 
 /*
@@ -40,4 +41,4 @@ void Motor_Move(int16_t duty_cycle) {
 
 
 
-// void 
+// create a function that calls linked list of nodes from the rrt* output and then call that function in main

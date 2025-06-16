@@ -185,7 +185,8 @@ uint8_t extract_path(
     double goal_y,
     double goal_radius,
     Node** path,
-    int* path_length);
+    int* path_length,
+    Node**  goal_node_out);
 
 
 /**
